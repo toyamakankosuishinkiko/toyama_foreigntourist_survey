@@ -1,0 +1,1978 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>富山県訪日外国人アンケート調査2025 解析・分析結果</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --teal: #4DB5B0;
+    --teal-dark: #3A9591;
+    --teal-light: #E8F4F3;
+    --teal-pale: #F4FAF9;
+    --navy: #1E3A8A;
+    --navy-dark: #152960;
+    --navy-light: #E8EDF5;
+    --ink: #1A1A1A;
+    --ink-soft: #333333;
+    --gray-900: #2D2D2D;
+    --gray-700: #555555;
+    --gray-500: #888888;
+    --gray-300: #D4D4D4;
+    --gray-200: #E8E8E8;
+    --gray-100: #F4F4F4;
+    --gray-50: #FAFAFA;
+    --paper: #FBFAF7;
+    --accent: #D97757;
+    --amber: #E8A04A;
+    --sans: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
+    --display: 'Bodoni Moda', serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.7;
+    font-feature-settings: "palt";
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 48px; }
+
+  /* ===== Cover ===== */
+  .cover {
+    position: relative;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--paper) 0%, var(--teal-pale) 100%);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 48px 0;
+  }
+  .cover::before {
+    content: "";
+    position: absolute;
+    top: -10%; right: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(77,181,176,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .cover::after {
+    content: "";
+    position: absolute;
+    bottom: -20%; left: -10%;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(30,58,138,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .cover-top { display: flex; justify-content: space-between; align-items: flex-start; position: relative; z-index: 2; }
+  .meta-tag {
+    font-family: var(--mono); font-size: 11px; color: var(--gray-700);
+    letter-spacing: 0.1em; border: 1px solid var(--gray-300); padding: 6px 12px; border-radius: 2px;
+  }
+  .cover-main { position: relative; z-index: 2; padding: 80px 0; }
+  .cover-eyebrow {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.3em;
+    color: var(--teal-dark); margin-bottom: 32px; text-transform: uppercase;
+  }
+  .cover-eyebrow::before { content: "—— "; }
+  .cover-title {
+    font-family: var(--sans);
+    font-size: clamp(34px, 5vw, 58px);
+    font-weight: 900;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+  .cover-title .accent { color: var(--navy); position: relative; display: inline-block; }
+  .cover-title .accent::after {
+    content: ""; position: absolute; bottom: 6px; left: 0; width: 100%; height: 10px;
+    background: var(--teal); opacity: 0.35; z-index: -1;
+  }
+  .cover-subtitle {
+    font-family: var(--sans); font-size: 17px; font-weight: 400;
+    color: var(--gray-700); margin-bottom: 56px; max-width: 760px; line-height: 1.85;
+  }
+  .cover-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+    padding-top: 40px; border-top: 1px solid var(--gray-300);
+  }
+  .stat-block { display: flex; flex-direction: column; }
+  .stat-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em;
+    color: var(--gray-500); text-transform: uppercase; margin-bottom: 10px;
+  }
+  .stat-value {
+    font-family: var(--display); font-size: 42px; font-weight: 700;
+    color: var(--navy); line-height: 1; margin-bottom: 4px;
+  }
+  .stat-unit { font-size: 18px; font-weight: 400; color: var(--gray-700); margin-left: 2px; font-family: var(--sans); }
+  .stat-note { font-size: 11px; color: var(--gray-700); margin-top: 4px; }
+  .cover-bottom {
+    position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: flex-end;
+    font-family: var(--mono); font-size: 11px; color: var(--gray-700); letter-spacing: 0.1em;
+  }
+
+  /* ===== Section ===== */
+  section { padding: 96px 0; position: relative; }
+  .section-header {
+    display: grid; grid-template-columns: 80px 1fr; gap: 32px;
+    margin-bottom: 56px; align-items: start;
+  }
+  .section-number {
+    font-family: var(--display); font-size: 42px; font-weight: 400;
+    color: var(--teal); font-style: italic; line-height: 1; padding-top: 8px;
+  }
+  .section-title-block { border-top: 2px solid var(--navy); padding-top: 16px; }
+  .section-eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.25em;
+    color: var(--teal-dark); margin-bottom: 12px; text-transform: uppercase;
+  }
+  .section-title {
+    font-family: var(--sans); font-size: 30px; font-weight: 700;
+    color: var(--ink); line-height: 1.4; letter-spacing: -0.01em;
+  }
+  .section-lead {
+    font-family: var(--sans); font-size: 15px; color: var(--gray-700);
+    max-width: 820px; margin-top: 18px; line-height: 1.9;
+  }
+
+  /* ===== Summary Section ===== */
+  .summary-section { background: white; border-top: 1px solid var(--gray-200); }
+  .summary-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; margin-top: 24px; }
+  .key-findings { display: flex; flex-direction: column; gap: 0; }
+  .finding {
+    display: grid; grid-template-columns: 56px 1fr; gap: 20px;
+    padding: 22px 0; border-bottom: 1px solid var(--gray-200);
+    transition: all 0.3s ease;
+  }
+  .finding:hover { padding-left: 12px; background: linear-gradient(90deg, var(--teal-pale) 0%, transparent 100%); }
+  .finding-num {
+    font-family: var(--display); font-size: 32px; font-weight: 700;
+    color: var(--teal); font-style: italic; line-height: 1;
+  }
+  .finding-content h4 {
+    font-family: var(--sans); font-size: 16px; font-weight: 700;
+    color: var(--ink); margin-bottom: 6px; line-height: 1.5;
+  }
+  .finding-content p { font-size: 13px; color: var(--gray-700); line-height: 1.75; }
+
+  .summary-callout {
+    background: var(--navy); color: white; padding: 44px 36px; border-radius: 4px;
+    position: sticky; top: 24px; overflow: hidden;
+  }
+  .summary-callout::before {
+    content: ""; position: absolute; top: -50%; right: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(77,181,176,0.25) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .summary-callout > * { position: relative; z-index: 1; }
+  .callout-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em;
+    color: var(--teal); margin-bottom: 16px; text-transform: uppercase;
+  }
+  .callout-headline {
+    font-family: var(--sans); font-size: 22px; font-weight: 700;
+    line-height: 1.5; margin-bottom: 28px;
+  }
+  .callout-points { list-style: none; padding: 0; }
+  .callout-points li {
+    padding: 14px 0; border-top: 1px solid rgba(255,255,255,0.15);
+    font-size: 13px; line-height: 1.7;
+    display: grid; grid-template-columns: 32px 1fr; gap: 12px;
+  }
+  .callout-points li::before { content: "→"; color: var(--teal); font-weight: 700; }
+
+  /* ===== PCA Section ===== */
+  .pca-section { background: var(--paper); border-top: 1px solid var(--gray-200); }
+  .pca-wrap {
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px;
+    align-items: start;
+  }
+  .pca-chart-box {
+    background: white; padding: 32px; border: 1px solid var(--gray-200); border-radius: 4px;
+    position: relative;
+  }
+  .pca-chart-box canvas { max-height: 500px; }
+  .pca-axis-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em;
+    color: var(--gray-500); text-transform: uppercase;
+  }
+  .quadrant-list { display: flex; flex-direction: column; gap: 14px; }
+  .quadrant {
+    background: white; border-left: 3px solid var(--teal);
+    padding: 18px 22px; border-radius: 2px; border-top: 1px solid var(--gray-200);
+    border-right: 1px solid var(--gray-200); border-bottom: 1px solid var(--gray-200);
+  }
+  .quadrant.q1 { border-left-color: #E07A5F; }
+  .quadrant.q2 { border-left-color: var(--teal); }
+  .quadrant.q3 { border-left-color: var(--navy); }
+  .quadrant.q4 { border-left-color: var(--amber); }
+  .quadrant-name {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em;
+    color: var(--gray-500); text-transform: uppercase; margin-bottom: 6px;
+  }
+  .quadrant-title { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .quadrant-desc { font-size: 12px; color: var(--gray-700); line-height: 1.7; }
+
+  /* ===== Highlight Bar ===== */
+  .highlight-section { background: var(--gray-50); padding: 64px 0; border-top: 1px solid var(--gray-200); }
+  .highlight-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .highlight-item { padding: 24px 28px; border-right: 1px solid var(--gray-300); transition: all 0.3s ease; }
+  .highlight-item:last-child { border-right: none; }
+  .highlight-item:hover { background: white; }
+  .highlight-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em;
+    color: var(--gray-500); text-transform: uppercase; margin-bottom: 8px;
+  }
+  .highlight-value {
+    font-family: var(--display); font-size: 34px; font-weight: 700;
+    color: var(--navy); line-height: 1.1;
+  }
+  .highlight-trend {
+    display: inline-block; margin-left: 6px; font-size: 12px;
+    font-family: var(--mono); color: var(--teal-dark); font-weight: 700;
+  }
+  .highlight-trend.down { color: var(--accent); }
+  .highlight-desc { font-size: 12px; color: var(--gray-700); margin-top: 8px; line-height: 1.6; }
+
+  /* ===== Overall comparison chart ===== */
+  .overall-section { background: white; border-top: 1px solid var(--gray-200); }
+  .chart-card {
+    background: white; padding: 36px; border: 1px solid var(--gray-200);
+    border-radius: 4px; margin-top: 24px;
+  }
+  .chart-card canvas { max-height: 480px; }
+  .chart-caption {
+    font-size: 12px; color: var(--gray-700); margin-top: 16px; line-height: 1.7;
+    padding-top: 16px; border-top: 1px dashed var(--gray-300);
+  }
+  .two-charts { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+  .two-charts .chart-card { margin-top: 0; padding: 28px; }
+  .two-charts canvas { max-height: 320px; }
+  .chart-card h4 {
+    font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 16px;
+    padding-bottom: 12px; border-bottom: 1px solid var(--gray-200);
+  }
+
+  /* ===== Country Tabs ===== */
+  .countries-section { background: var(--paper); border-top: 1px solid var(--gray-200); }
+  .tabs-nav {
+    display: flex; gap: 0; margin-bottom: 0;
+    border-bottom: 2px solid var(--gray-200);
+    overflow-x: auto; scrollbar-width: thin;
+    background: white; border-radius: 4px 4px 0 0;
+  }
+  .tab-btn {
+    background: none; border: none; padding: 18px 24px;
+    font-family: var(--sans); font-size: 14px; font-weight: 500;
+    color: var(--gray-700); cursor: pointer; position: relative;
+    transition: all 0.25s ease; white-space: nowrap; letter-spacing: 0.02em;
+    flex: 1; min-width: 130px;
+  }
+  .tab-btn:hover { color: var(--navy); background: var(--teal-pale); }
+  .tab-btn.active { color: var(--navy); font-weight: 700; background: var(--teal-pale); }
+  .tab-btn.active::after {
+    content: ""; position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 3px; background: var(--teal);
+  }
+  .tab-btn .tab-rate {
+    display: block; font-family: var(--mono); font-size: 11px;
+    color: var(--teal-dark); margin-top: 4px; font-weight: 500;
+  }
+  .tab-content { display: none; padding: 48px 0; animation: fadeIn 0.4s ease; }
+  .tab-content.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* country header */
+  .country-summary {
+    background: white; padding: 36px 40px;
+    border-radius: 4px; border: 1px solid var(--gray-200);
+    margin-bottom: 36px;
+    display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: center;
+  }
+  .country-summary-left h3 {
+    font-family: var(--sans); font-size: 28px; font-weight: 900;
+    color: var(--ink); margin-bottom: 6px; line-height: 1.3;
+  }
+  .country-summary-left .country-en {
+    font-family: var(--display); font-size: 13px; font-style: italic;
+    color: var(--teal-dark); letter-spacing: 0.15em; margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .country-summary-left .country-typology {
+    display: inline-block;
+    font-family: var(--mono); font-size: 11px;
+    background: var(--navy); color: white; padding: 6px 12px;
+    letter-spacing: 0.1em; border-radius: 2px;
+  }
+  .country-summary-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .summary-meta-item {
+    background: var(--gray-50); padding: 16px 18px;
+    border-left: 3px solid var(--teal);
+  }
+  .summary-meta-item.alt { border-left-color: var(--navy); }
+  .summary-meta-item.warn { border-left-color: var(--accent); }
+  .summary-meta-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em;
+    color: var(--gray-500); text-transform: uppercase; margin-bottom: 6px;
+  }
+  .summary-meta-value {
+    font-family: var(--display); font-size: 22px; font-weight: 700;
+    color: var(--navy); line-height: 1.2;
+  }
+  .summary-meta-detail { font-size: 11px; color: var(--gray-700); margin-top: 4px; }
+
+  /* 2-column comparison: 全体 vs 目的地層 */
+  .compare-cols {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  }
+  .compare-col {
+    background: white; border: 1px solid var(--gray-200);
+    border-radius: 4px; overflow: hidden;
+  }
+  .compare-col-header {
+    padding: 18px 24px; font-size: 13px; font-weight: 700;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 2px solid var(--gray-200);
+  }
+  .compare-col-header.all { background: var(--teal-pale); color: var(--teal-dark); border-bottom-color: var(--teal); }
+  .compare-col-header.dst { background: var(--navy-light); color: var(--navy); border-bottom-color: var(--navy); }
+  .compare-col-header .n-tag {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    background: white; padding: 4px 10px; border-radius: 2px;
+  }
+  .compare-col-body { padding: 24px; }
+
+  .profile-list { list-style: none; padding: 0; }
+  .profile-list li {
+    padding: 12px 0; border-bottom: 1px dashed var(--gray-200);
+    display: grid; grid-template-columns: 1fr auto; gap: 16px;
+    font-size: 13px; line-height: 1.6;
+  }
+  .profile-list li:last-child { border-bottom: none; }
+  .profile-list .label { color: var(--ink-soft); }
+  .profile-list .val {
+    font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--navy);
+    white-space: nowrap;
+  }
+  .profile-list .val .delta {
+    display: inline-block; margin-left: 6px; padding: 2px 6px;
+    font-size: 10px; border-radius: 2px;
+  }
+  .profile-list .val .delta.up { background: var(--teal-light); color: var(--teal-dark); }
+  .profile-list .val .delta.down { background: #FDECE5; color: var(--accent); }
+
+  .insight-box {
+    background: var(--paper); border-left: 3px solid var(--teal);
+    padding: 14px 18px; margin-top: 16px;
+    font-size: 12.5px; color: var(--gray-700); line-height: 1.75;
+  }
+  .insight-box.warn { border-left-color: var(--accent); background: #FFF8F4; }
+  .insight-box strong { color: var(--ink); font-weight: 700; }
+
+  /* mini chart */
+  .mini-chart-wrap { margin-top: 20px; }
+  .mini-chart-wrap canvas { max-height: 220px; }
+
+  /* accordion */
+  .accordion {
+    margin-top: 28px; background: white;
+    border: 1px solid var(--gray-200); border-radius: 4px;
+  }
+  .accordion-header {
+    padding: 18px 24px; cursor: pointer; user-select: none;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px; font-weight: 700; color: var(--navy);
+    background: var(--gray-50); border-radius: 4px 4px 0 0;
+    transition: all 0.2s ease;
+  }
+  .accordion-header:hover { background: var(--teal-pale); }
+  .accordion-header .acc-icon {
+    font-family: var(--mono); font-size: 16px; transition: transform 0.3s ease;
+    color: var(--teal);
+  }
+  .accordion.open .accordion-header .acc-icon { transform: rotate(45deg); }
+  .accordion-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+  }
+  .accordion.open .accordion-body {
+    max-height: 3000px; padding: 24px;
+  }
+  .accordion-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  }
+  .accordion-grid .chart-card { margin-top: 0; padding: 20px; border: 1px solid var(--gray-200); }
+  .accordion-grid canvas { max-height: 260px; }
+  .accordion-grid h5 {
+    font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 12px;
+    padding-bottom: 8px; border-bottom: 1px solid var(--gray-200);
+  }
+
+  /* ===== Typology Section ===== */
+  .typology-section {
+    background: var(--navy); color: white;
+    position: relative; overflow: hidden;
+    border-top: 1px solid var(--gray-200);
+  }
+  .typology-section::before {
+    content: ""; position: absolute; top: 0; right: 0; width: 50%; height: 100%;
+    background: radial-gradient(ellipse at top right, rgba(77,181,176,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .typology-section .section-title { color: white; }
+  .typology-section .section-number { color: var(--teal); }
+  .typology-section .section-title-block { border-top-color: var(--teal); }
+  .typology-section .section-lead { color: rgba(255,255,255,0.75); }
+  .typology-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    margin-top: 32px; position: relative; z-index: 1;
+  }
+  .typology-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 28px 24px; border-radius: 4px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    position: relative; overflow: hidden;
+  }
+  .typology-card:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: var(--teal); transform: translateY(-4px);
+  }
+  .typology-card::before {
+    content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+    background: var(--teal); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .typology-card:hover::before { transform: scaleX(1); }
+  .typology-card-country {
+    font-family: var(--display); font-size: 13px; color: var(--teal);
+    letter-spacing: 0.15em; margin-bottom: 6px; text-transform: uppercase;
+    font-style: italic;
+  }
+  .typology-card-name {
+    font-family: var(--sans); font-size: 19px; font-weight: 700;
+    color: white; margin-bottom: 14px; line-height: 1.4;
+  }
+  .typology-card-desc { font-size: 12.5px; color: rgba(255,255,255,0.75); line-height: 1.75; }
+  .typology-card-tag {
+    display: inline-block; font-family: var(--mono); font-size: 10px;
+    color: var(--teal); border: 1px solid var(--teal); padding: 4px 10px;
+    margin-top: 14px; letter-spacing: 0.1em;
+  }
+
+  /* ===== Action Section ===== */
+  .action-section { background: white; border-top: 1px solid var(--gray-200); }
+  .action-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    margin-top: 32px;
+  }
+  .action-card {
+    border: 1px solid var(--gray-300); padding: 28px;
+    border-radius: 2px; background: var(--paper);
+    transition: all 0.3s ease;
+  }
+  .action-card:hover {
+    border-color: var(--teal);
+    box-shadow: 0 12px 32px rgba(30,58,138,0.08); transform: translateY(-2px);
+  }
+  .action-card-num {
+    font-family: var(--display); font-size: 13px; color: var(--teal-dark);
+    letter-spacing: 0.2em; margin-bottom: 14px; font-weight: 700;
+  }
+  .action-card-title {
+    font-family: var(--sans); font-size: 16px; font-weight: 700;
+    color: var(--ink); margin-bottom: 12px; line-height: 1.5;
+  }
+  .action-card-desc { font-size: 13px; color: var(--gray-700); line-height: 1.75; margin-bottom: 14px; }
+  .action-card-evidence {
+    border-top: 1px dashed var(--gray-300); padding-top: 12px;
+    font-family: var(--mono); font-size: 10.5px; color: var(--teal-dark); letter-spacing: 0.05em;
+  }
+
+  /* ===== Quote ===== */
+  .quote-section { background: var(--teal-pale); padding: 72px 0; border-top: 1px solid var(--gray-200); }
+  .quote-block { max-width: 880px; margin: 0 auto; text-align: center; }
+  .quote-mark {
+    font-family: var(--display); font-size: 90px; color: var(--teal);
+    line-height: 0.5; margin-bottom: 24px; font-style: italic;
+  }
+  .quote-text {
+    font-family: var(--sans); font-size: 22px; font-weight: 700;
+    color: var(--navy-dark); line-height: 1.7; letter-spacing: -0.01em;
+  }
+  .quote-text .em { color: var(--teal-dark); }
+
+  /* ===== Footer ===== */
+  footer { background: var(--ink); color: rgba(255,255,255,0.7); padding: 48px 0 32px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+  .footer-brand { font-family: var(--sans); font-size: 16px; color: white; font-weight: 700; margin-bottom: 12px; }
+  .footer-text { font-size: 12px; line-height: 1.7; color: rgba(255,255,255,0.6); }
+  .footer-col h6 {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em;
+    color: var(--teal); margin-bottom: 12px; text-transform: uppercase;
+  }
+  .footer-col p { font-size: 12px; line-height: 1.8; color: rgba(255,255,255,0.6); }
+  .footer-bottom {
+    padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.15);
+    display: flex; justify-content: space-between;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: rgba(255,255,255,0.4);
+  }
+
+  /* note */
+  .uk-warning {
+    background: linear-gradient(90deg, #FFF4ED 0%, #FFEAD9 100%);
+    border-left: 4px solid var(--accent);
+    padding: 18px 24px; margin-bottom: 28px; border-radius: 2px;
+    font-size: 13px; color: var(--ink-soft); line-height: 1.7;
+  }
+  .uk-warning strong { color: var(--accent); }
+
+  /* responsive */
+  @media (max-width: 960px) {
+    .container { padding: 0 24px; }
+    .cover-stats, .highlight-grid, .summary-grid, .action-grid, .typology-grid,
+    .footer-grid, .pca-wrap, .compare-cols, .country-summary, .country-summary-meta,
+    .two-charts, .accordion-grid { grid-template-columns: 1fr; }
+    .section-header { grid-template-columns: 1fr; }
+    .cover-title { font-size: 32px; }
+    section { padding: 64px 0; }
+    .tab-btn { flex: 0 0 auto; min-width: 110px; padding: 14px 16px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== COVER ===== -->
+<header class="cover">
+  <div class="container cover-top">
+    <div class="meta-tag">INTERNAL USE / 庁内関係者向け</div>
+    <div class="meta-tag">2026.05 ISSUED</div>
+  </div>
+
+  <div class="container cover-main">
+    <div class="cover-eyebrow">Toyama Inbound Tourism Survey 2025 / Analytical Report</div>
+    <h1 class="cover-title">
+      富山県訪日外国人<br>アンケート調査<span class="accent">2025</span><br>解析・分析結果
+    </h1>
+    <p class="cover-subtitle">
+      訪日外国人観光客2,032名の旅程・意識データに基づき、主要7か国の市場プロファイルと「富山を明確な目的地として選ぶ層」の特徴を、全体傾向との対比で可視化する。庁内関係者向けの戦略基礎資料。
+    </p>
+
+    <div class="cover-stats">
+      <div class="stat-block">
+        <div class="stat-label">Total Sample</div>
+        <div class="stat-value">2,032<span class="stat-unit">名</span></div>
+        <div class="stat-note">訪日外国人観光客</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Key Markets</div>
+        <div class="stat-value">7<span class="stat-unit">か国</span></div>
+        <div class="stat-note">台・豪・米・中・尼・泰・英</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Destination Layer</div>
+        <div class="stat-value">15.3<span class="stat-unit">%</span></div>
+        <div class="stat-note">目的地層 n=310</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Non-Destination</div>
+        <div class="stat-value">84.7<span class="stat-unit">%</span></div>
+        <div class="stat-note">非目的地層 n=1,722</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container cover-bottom">
+    <div>富山県インバウンド観光調査 / 2026年版</div>
+    <div>VOL.01 / FULL EDITION</div>
+  </div>
+</header>
+
+<!-- ===== EXECUTIVE SUMMARY ===== -->
+<section class="summary-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">01</div>
+      <div class="section-title-block">
+        <div class="section-eyebrow">Executive Summary / 全体サマリー</div>
+        <h2 class="section-title">7か国は単一市場ではない。<br>富山インバウンドは4象限構造で動いている。</h2>
+        <p class="section-lead">本調査の最大の発見は、主要7か国がほぼ完全に異なるメカニズムで富山を訪問しているという定量的事実である。「アジア」「欧米豪」という従来の大括り区分は戦略立案の単位として粗すぎる。以下、6つのキー発見と、市場別個別最適化を要請する核心メッセージを示す。</p>
+      </div>
+    </div>
+
+    <div class="summary-grid">
+      <div class="key-findings">
+        <div class="finding">
+          <div class="finding-num">01</div>
+          <div class="finding-content">
+            <h4>市場は4象限に分かれる。「アジア／欧米豪」二分法は機能しない</h4>
+            <p>主成分分析により、台湾・中国（東アジア漢字圏）／豪・米・英（欧米豪成熟）／タイ（東南アジア新興）／インドネシア（独立象限）の4群構造が定量的に確認された。同じアジアでもタイとインドネシアは別象限に布置する。</p>
+          </div>
+        </div>
+        <div class="finding">
+          <div class="finding-num">02</div>
+          <div class="finding-content">
+            <h4>欧米豪の「その他」高比率は中継地利用ゆえの該当なし回答</h4>
+            <p>豪32.0%・米36.8%・英38.8%の「その他」認知は、独自情報経路ではなく「東京⇔金沢／高山ルートに富山が自動的に組み込まれた結果、認知経路として該当する選択肢がない」ことの反映と解釈される。</p>
+          </div>
+        </div>
+        <div class="finding">
+          <div class="finding-num">03</div>
+          <div class="finding-content">
+            <h4>SNSは共通基盤、目的地化の決め手はガイドブックと口コミ</h4>
+            <p>SNS認知は全体と目的地層で差わずか+1.2pt。一方ガイドブック（+5.6pt）・家族友人紹介（+5.4pt）が目的地化を押し上げる。情報の信頼性・能動性が「立ち寄り」を「目的地」に変える。</p>
+          </div>
+        </div>
+        <div class="finding">
+          <div class="finding-num">04</div>
+          <div class="finding-content">
+            <h4>地方空港の存在が目的地化を物理的に基礎づける</h4>
+            <p>目的地層では小松空港利用率が3.4倍に跳ね上がり、首都圏空港経由は20pt低下。台湾→小松便、タイ→関空便など国際路線の物理的存在こそが目的地化の前提条件であることが裏付けられた。</p>
+          </div>
+        </div>
+        <div class="finding">
+          <div class="finding-num">05</div>
+          <div class="finding-content">
+            <h4>目的地化率は4.0%〜26.4%まで6倍以上の格差</h4>
+            <p>台湾26.4% ／タイ25.5% ／中17.7% ／尼17.5% ／英15.0% ／米13.2% ／豪10.2% ／独4.0%。市場別に目的地化の進度が大きく異なり、施策設計の起点を「認知形成」とすべき市場と「深掘り」を急ぐべき市場が明確に分かれる。</p>
+          </div>
+        </div>
+        <div class="finding">
+          <div class="finding-num">06</div>
+          <div class="finding-content">
+            <h4>潜在ニーズと顕在化のギャップに商品設計の余地</h4>
+            <p>庄川峡遊覧船（+24.5pt）、五箇山合掌造り集落（+17.9pt）、宇奈月温泉（+14.8pt）など、潜在的に行きたいと思われている奥地スポットの訪問変換率に大きな余地。周遊バス・予約導線・宿泊パッケージ整備で打開できる。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-callout">
+        <div class="callout-label">Core Message</div>
+        <p class="callout-headline">7か国それぞれに、固有の「目的地化メカニズム」が存在する。</p>
+        <ul class="callout-points">
+          <li>欧米豪市場は「コンテンツ改善」以前に、認知形成段階の戦略再構築が必要</li>
+          <li>アジア各国は既に能動的関心があるため、適切な体験提供での深掘りが要</li>
+          <li>市場別のメッセージ・媒体・パッケージ設計を変えることの戦略的妥当性が定量的に示された</li>
+          <li>とりわけ欧米豪3か国の中でも、豪／米／英は完全に異なる3類型として扱う必要がある</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PCA Map Section ===== -->
+<section class="pca-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">02</div>
+      <div class="section-title-block">
+        <div class="section-eyebrow">PCA Map / 主成分分析による市場ポジショニング</div>
+        <h2 class="section-title">7か国の位置関係を1枚絵で把握する。</h2>
+        <p class="section-lead">各国の選択率プロファイル（年齢・同行者・宿泊・空港・期待・スポット等数十項目）を主成分分析で2軸に圧縮。PC1×PC2の累積寄与率は64.0%で、データの特徴の約3分の2をこの平面で表現できる。横軸は「能動的選択⇔通過利用」、縦軸は「若年SNS志向⇔シニア文化志向」の対立軸を意味する。</p>
+      </div>
+    </div>
+
+    <div class="pca-wrap">
+      <div class="pca-chart-box">
+        <canvas id="pcaChart"></canvas>
+        <div style="display:flex; justify-content:space-between; margin-top:12px;">
+          <span class="pca-axis-label">X: 通過利用 ⇔ 能動的選択（PC1: 42.4%）</span>
+          <span class="pca-axis-label">Y: シニア文化 ⇔ 若年SNS（PC2: 21.6%）</span>
+        </div>
+      </div>
+
+      <div class="quadrant-list">
+        <div class="quadrant q1">
+          <div class="quadrant-name">Quadrant 右下 / 東アジア漢字圏</div>
+          <div class="quadrant-title">台湾・中国：能動的選択＋家族中心</div>
+          <div class="quadrant-desc">ガイドブックや知人紹介を通じて富山を能動的に選んでいる。漢字圏としての情報接触パターンの類似性が示唆される。</div>
+        </div>
+        <div class="quadrant q2">
+          <div class="quadrant-name">Quadrant 左下 / 欧米豪成熟市場</div>
+          <div class="quadrant-title">豪・米・英：周遊ルートの中継点</div>
+          <div class="quadrant-desc">夫婦中心・首都圏空港経由・通過利用が支配的。富山そのものを能動的に調べた形跡が薄く、3か国はほぼ一直線上に布置。</div>
+        </div>
+        <div class="quadrant q3">
+          <div class="quadrant-name">Quadrant 右上 / 東南アジア新興</div>
+          <div class="quadrant-title">タイ：SNS＋若年＋関西経由</div>
+          <div class="quadrant-desc">SNS依存・新規体験志向と、東アジア漢字圏に近い能動性を併せ持つ独自象限。関西経由の周遊パターンが特徴的。</div>
+        </div>
+        <div class="quadrant q4">
+          <div class="quadrant-name">Quadrant 上方 / 完全独立</div>
+          <div class="quadrant-title">インドネシア：雪体験＋若年友人</div>
+          <div class="quadrant-desc">SNS依存の極端な高さ、ウィンタースポーツへの突出した期待、若年友人グループ中心という、他のいずれの市場とも重ならないプロファイル。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Highlight numbers ===== -->
+<section class="highlight-section">
+  <div class="container">
+    <div class="highlight-grid">
+      <div class="highlight-item">
+        <div class="highlight-label">3泊以上比率</div>
+        <div class="highlight-value">37.1<span style="font-size:18px;">%</span><span class="highlight-trend">+18.3pt</span></div>
+        <div class="highlight-desc">非目的地層 18.8% → 目的地層 37.1%</div>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-label">小松空港利用率</div>
+        <div class="highlight-value">11.0<span style="font-size:18px;">%</span><span class="highlight-trend">+7.6pt</span></div>
+        <div class="highlight-desc">非目的地層 3.4% → 約3.4倍に上昇</div>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-label">リピーター比率</div>
+        <div class="highlight-value">23.6<span style="font-size:18px;">%</span><span class="highlight-trend">+10.8pt</span></div>
+        <div class="highlight-desc">非目的地層 12.8% → ほぼ倍増</div>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-label">県内観光率</div>
+        <div class="highlight-value">85.5<span style="font-size:18px;">%</span><span class="highlight-trend">+14.1pt</span></div>
+        <div class="highlight-desc">非目的地層 71.4% → 目的地層 85.5%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Overall comparison ===== -->
+<section class="overall-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">03</div>
+      <div class="section-title-block">
+        <div class="section-eyebrow">Overall Comparison / 全体傾向の比較</div>
+        <h2 class="section-title">全体傾向と目的地層の差分。<br>滞在の深さ・空港戦略・認知形成で構造的差が現れる。</h2>
+        <p class="section-lead">回答者全体と「富山を明確に目的地として選ぶ層」を主要項目で比較。差分の大きい順に並べると、目的地層は「長く滞在し、富山県内の主要スポットを広く回遊し、地方空港を利用し、信頼性の高い情報源で富山を知って訪れる」という像が定量的に浮かび上がる。</p>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <h4>主要項目の差分（目的地層 − 非目的地層, pt）</h4>
+      <canvas id="overallDiffChart"></canvas>
+      <p class="chart-caption">青系：目的地層で上昇する項目（滞在延長・地方空港・能動的情報源など）／オレンジ系：目的地層で減少する項目（首都圏空港集中・日帰り・初回訪問など）。差分が大きいほど、その項目が目的地化を識別する指標として強く機能する。</p>
+    </div>
+
+    <div class="two-charts">
+      <div class="chart-card">
+        <h4>宿泊数の構造変化</h4>
+        <canvas id="stayChart"></canvas>
+        <p class="chart-caption">最頻区分が「日帰り」から「3泊以上」へ移行。目的地層では「2泊+3泊以上」が55.2%と多数派に。</p>
+      </div>
+      <div class="chart-card">
+        <h4>認知経路の構造変化</h4>
+        <canvas id="awareChart"></canvas>
+        <p class="chart-caption">SNS差分は+1.2ptに留まる一方、ガイドブック・家族友人紹介が目的地化の決め手として機能。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Country Tabs Section ===== -->
+<section class="countries-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">04</div>
+      <div class="section-title-block">
+        <div class="section-eyebrow">Country Profiles / 主要7か国の市場プロファイル</div>
+        <h2 class="section-title">7か国それぞれの「全体傾向」と「目的地化層」を並置する。</h2>
+        <p class="section-lead">タブで国を切り替え、各国セクション内では左カラムに「①回答者全体の傾向」、右カラムに「②富山を明確に目的地として来ている人の傾向」を並置。差分が大きい項目には変化幅バッジ（+○pt）を付与している。詳細グラフは下部のアコーディオンで開閉可能。</p>
+      </div>
+    </div>
+
+    <div class="tabs-nav" role="tablist">
+      <button class="tab-btn active" data-tab="tw">台湾<span class="tab-rate">目的地化率 26.4%</span></button>
+      <button class="tab-btn" data-tab="th">タイ<span class="tab-rate">目的地化率 25.5%</span></button>
+      <button class="tab-btn" data-tab="cn">中国<span class="tab-rate">目的地化率 17.7%</span></button>
+      <button class="tab-btn" data-tab="id">インドネシア<span class="tab-rate">目的地化率 17.5%</span></button>
+      <button class="tab-btn" data-tab="uk">イギリス<span class="tab-rate">目的地化率 15.0%</span></button>
+      <button class="tab-btn" data-tab="us">アメリカ<span class="tab-rate">目的地化率 13.2%</span></button>
+      <button class="tab-btn" data-tab="au">オーストラリア<span class="tab-rate">目的地化率 10.2%</span></button>
+    </div>
+
+    <!-- ========== TAIWAN ========== -->
+    <div class="tab-content active" id="tab-tw">
+      <div class="country-summary">
+        <div class="country-summary-left">
+          <div class="country-en">Taiwan</div>
+          <h3>台湾</h3>
+          <span class="country-typology">TYPOLOGY: 日帰り頻度型</span>
+        </div>
+        <div class="country-summary-meta">
+          <div class="summary-meta-item">
+            <div class="summary-meta-label">Sample n</div>
+            <div class="summary-meta-value">284</div>
+            <div class="summary-meta-detail">全体最大サンプル</div>
+          </div>
+          <div class="summary-meta-item alt">
+            <div class="summary-meta-label">目的地化率</div>
+            <div class="summary-meta-value">26.4<span style="font-size:14px;">%</span></div>
+            <div class="summary-meta-detail">主要7か国中1位</div>
+          </div>
+          <div class="summary-meta-item">
+            <div class="summary-meta-label">PCA象限</div>
+            <div class="summary-meta-value" style="font-size:16px;">右下</div>
+            <div class="summary-meta-detail">東アジア漢字圏群</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="compare-cols">
+        <div class="compare-col">
+          <div class="compare-col-header all">
+            <span>① 回答者全体の傾向</span><span class="n-tag">n=284</span>
+          </div>
+          <div class="compare-col-body">
+            <ul class="profile-list">
+              <li><span class="label">同行者：家族</span><span class="val">51.4%</span></li>
+              <li><span class="label">年齢層：40代中心</span><span class="val">29.9%</span></li>
+              <li><span class="label">小松空港利用</span><span class="val">25.4%</span></li>
+              <li><span class="label">中部国際空港</span><span class="val">29.6%</span></li>
+              <li><span class="label">出発地：金沢</span><span class="val">46.1%</span></li>
+              <li><span class="label">ガイドブック認知</span><span class="val">27.8%</span></li>
+              <li><span class="label">リピーター比率</span><span class="val">25.3%</span></li>
+              <li><span class="label">期待：景観/自然</span><span class="val">76.8%</span></li>
+              <li><span class="label">雨晴海岸 訪問予定</span><span class="val">48.6%</span></li>
+            </ul>
+            <div class="insight-box">
+              <strong>金沢を拠点に富山を日帰り訪問するパターンが支配的。</strong>歴史的な親日感情を背景に、紙媒体を含む幅広い情報源が機能している。小松空港利用率25.4%は全体平均（4.6%）の5倍以上で、台湾→小松便の存在が旅程構造を物理的に規定している。
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-col">
+          <div class="compare-col-header dst">
+            <span>② 目的地として来ている層</span><span class="n-tag">n=75 / 26.4%</span>
+          </div>
+          <div class="compare-col-body">
+            <ul class="profile-list">
+              <li><span class="label">小松空港利用</span><span class="val">41.3%<span class="delta up">+21.7pt</span></span></li>
+              <li><span class="label">日帰り比率</span><span class="val">52.0%<span class="delta up">+17.1pt</span></span></li>
+              <li><span class="label">期待：歴史/文化</span><span class="val">36.0%<span class="delta up">+18.8pt</span></span></li>
+              <li><span class="label">女性比率</span><span class="val">62.7%<span class="delta up">+16.3pt</span></span></li>
+              <li><span class="label">ガイドブック認知</span><span class="val">37.3%<span class="delta up">+12.9pt</span></span></li>
+              <li><span class="label">同行者：家族（維持）</span><span class="val">高水準</span></li>
+              <li><span class="label">3泊以上比率</span><span class="val">20.0%<span class="delta up">+6.1pt</span></span></li>
+            </ul>
+            <div class="insight-box warn">
+              <strong>「滞在の長さ」ではなく「往復頻度」で目的地化が表れる独自市場。</strong>日帰り比率が逆に+17.1pt上昇するのは7か国中で台湾のみ。金沢拠点で富山を日帰り往復する旅程が目的地層でも主流であり、リピート率の高さ（25.3%）が「往復頻度型」を支えている。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span>▸ 数値詳細グラフを開く（年齢・同行者・空港・訪問回数・宿泊・知ったきっかけ・期待）</span>
+          <span class="acc-icon">+</span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-grid">
+            <div class="chart-card">
+              <h5>年齢層構成</h5>
+              <canvas id="tw-age"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>同行者構成</h5>
+              <canvas id="tw-comp"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>利用空港</h5>
+              <canvas id="tw-air"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>訪問回数</h5>
+              <canvas id="tw-rep"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>宿泊数</h5>
+              <canvas id="tw-stay"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>知ったきっかけ</h5>
+              <canvas id="tw-info"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>期待コンテンツ</h5>
+              <canvas id="tw-exp"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== THAILAND ========== -->
+    <div class="tab-content" id="tab-th">
+      <div class="country-summary">
+        <div class="country-summary-left">
+          <div class="country-en">Thailand</div>
+          <h3>タイ</h3>
+          <span class="country-typology">TYPOLOGY: 友人グループ文化体験型</span>
+        </div>
+        <div class="country-summary-meta">
+          <div class="summary-meta-item">
+            <div class="summary-meta-label">Sample n</div>
+            <div class="summary-meta-value">98</div>
+            <div class="summary-meta-detail">主要7か国中6位</div>
+          </div>
+          <div class="summary-meta-item alt">
+            <div class="summary-meta-label">目的地化率</div>
+            <div class="summary-meta-value">25.5<span style="font-size:14px;">%</span></div>
+            <div class="summary-meta-detail">主要7か国中2位</div>
+          </div>
+          <div class="summary-meta-item">
+            <div class="summary-meta-label">PCA象限</div>
+            <div class="summary-meta-value" style="font-size:16px;">右上</div>
+            <div class="summary-meta-detail">東南アジア新興群</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="compare-cols">
+        <div class="compare-col">
+          <div class="compare-col-header all">
+            <span>① 回答者全体の傾向</span><span class="n-tag">n=98</span>
+          </div>
+          <div class="compare-col-body">
+            <ul class="profile-list">
+              <li><span class="label">関西国際空港利用</span><span class="val">51.0%</span></li>
+              <li><span class="label">女性比率</span><span class="val">60.2%</span></li>
+              <li><span class="label">年齢：30代中心</span><span class="val">39.8%</span></li>
+              <li><span class="label">出発地：大阪</span><span class="val">21.4%</span></li>
+              <li><span class="label">SNS認知</span><span class="val">70.4%</span></li>
+              <li><span class="label">メディア認知</span><span class="val">10.2%</span></li>
+              <li><span class="label">期待：ショッピング</span><span class="val">19.4%</span></li>
+              <li><span class="label">富岩運河環水公園 訪問予定</span><span class="val">57.1%</span></li>
+              <li><span class="label">3泊以上比率</span><span class="val">30.6%</span></li>
+            </ul>
+            <div class="insight-box">
+              <strong>関空入り＋関西広域周遊の一環としての富山訪問が典型パターン。</strong>台湾の小松便、インドネシアの成田便とは異なる第三の地理的フットプリント。女性比率60.2%は7か国中最高で、ショッピング期待19.4%も全市場中最高。
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-col">
+          <div class="compare-col-header dst">
+            <span>② 目的地として来ている層</span><span class="n-tag">n=25 / 25.5%</span>
+          </div>
+          <div class="compare-col-body">
+            <ul class="profile-list">
+              <li><span class="label">同行者：友人</span><span class="val">56.0%<span class="delta up">+38.2pt</span></span></li>
+              <li><span class="label">3泊以上比率</span><span class="val">56.0%<span class="delta up">+34.1pt</span></span></li>
+              <li><span class="label">夫婦/パートナー</span><span class="val">8.0%<span class="delta down">−23.5pt</span></span></li>
+              <li><span class="label">期待：歴史/文化</span><span class="val">40.0%<span class="delta up">+19.5pt</span></span></li>
+              <li><span class="label">期待：景観/自然</span><span class="val">44.0%<span class="delta down">−17.6pt</span></span></li>
+              <li><span class="label">期待：グルメ/食事</span><span class="val">32.0%<span class="delta down">−14.6pt</span></span></li>
+              <li><span class="label">リピーター（3回以上）</span><span class="val">20.0%<span class="delta up">+14.5pt</span></span></li>
+              <li><span class="label">関西国際空港利用</span><span class="val">48.0%</span></li>
+            </ul>
+            <div class="insight-box warn">
+              <strong>30〜40代友人グループが圧倒的中核。同行者：友人+38.2ptは7か国全項目で最大級の差分。</strong>「自然・温泉を期待する周遊客」ではなく「歴史文化・買い物・冬季体験を能動的に求める友人グループ」という独自層。タイの一般的なインバウンド傾向（20代女性中心）とも異なる。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span>▸ 数値詳細グラフを開く（年齢・同行者・空港・訪問回数・宿泊・知ったきっかけ・期待）</span>
+          <span class="acc-icon">+</span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-grid">
+            <div class="chart-card">
+              <h5>年齢層構成</h5>
+              <canvas id="th-age"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>同行者構成</h5>
+              <canvas id="th-comp"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>利用空港</h5>
+              <canvas id="th-air"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>訪問回数</h5>
+              <canvas id="th-rep"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>宿泊数</h5>
+              <canvas id="th-stay"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>知ったきっかけ</h5>
+              <canvas id="th-info"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>期待コンテンツ</h5>
+              <canvas id="th-exp"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== CHINA ========== -->
+    <div class="tab-content" id="tab-cn">
+      <div class="country-summary">
+        <div class="country-summary-left">
+          <div class="country-en">China</div>
+          <h3>中国</h3>
+          <span class="country-typology">TYPOLOGY: 長期深堀型</span>
+        </div>
+        <div class="country-summary-meta">
+          <div class="summary-meta-item">
+            <div class="summary-meta-label">Sample n</div>
+            <div class="summary-meta-value">175</div>
+            <div class="summary-meta-detail">主要7か国中4位</div>
+          </div>
+          <div class="summary-meta-item alt">
+            <div class="summary-meta-label">目的地化率</div>
+            <div class="summary-meta-value">17.7<span style="font-size:14px;">%</span></div>
+            <div class="summary-meta-detail">主要7か国中3位</div>
+          </div>
+          <div class="summary-meta-item">
+            <div class="summary-meta-label">PCA象限</div>
+            <div class="summary-meta-value" style="font-size:16px;">右下</div>
+            <div class="summary-meta-detail">東アジア漢字圏群</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="compare-cols">
+        <div class="compare-col">
+          <div class="compare-col-header all">
+            <span>① 回答者全体の傾向</span><span class="n-tag">n=175</span>
+          </div>
+          <div class="compare-col-body">
+            <ul class="profile-list">
+              <li><span class="label">同行者：家族</span><span class="val">52.6%</span></li>
+              <li><span class="label">羽田空港利用</span><span class="val">30.9%</span></li>
+              <li><span class="label">関西国際空港</span><span class="val">24.6%</span></li>
+              <li><span class="label">出発地：金沢</span><span class="val">34.9%</span></li>
+              <li><span class="label">期待：景観/自然</span><span class="val">82.3%</span></li>
+              <li><span class="label">期待：グルメ/食事</span><span class="val">72.0%</span></li>
+              <li><span class="label">雨晴海岸 訪問予定</span><span class="val">78.3%</span></li>
+              <li><span class="label">県内観光率</span><span class="val">89.7%</span></li>
+              <li><span class="label">2泊以上比率</span><span class="val">54.8%</span></li>
+            </ul>
+            <div class="insight-box">
+              <strong>能動的に富山県内を周遊する傾向が明確。</strong>景観/自然82.3%・グルメ/食事72.0%・県内観光率89.7%はいずれも7か国中最高水準。台湾と異なり首都圏・関西経由が厚く、地方空港集中は見られない。SNS49.7%・ガイドブック22.3%と多元的な情報源が機能。
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-col">
+          <div class="compare-col-header dst">
+            <span>② 目的地として来ている層</span><span class="n-tag">n=31 / 17.7%</span>
+          </div>
+          <div class="compare-col-body">
+            <ul class="profile-list">
+              <li><span class="label">3泊以上比率</span><span class="val">45.2%<span class="delta up">+23.7pt</span></span></li>
+              <li><span class="label">期待：グルメ/食事</span><span class="val">87.1%<span class="delta up">+18.3pt</span></span></li>
+              <li><span class="label">期待：ウィンタースポーツ</span><span class="val">29.0%<span class="delta up">+16.5pt</span></span></li>
+              <li><span class="label">ガイドブック認知</span><span class="val">35.5%<span class="delta up">+16.1pt</span></span></li>
+              <li><span class="label">リピーター（2回目）</span><span class="val">22.6%<span class="delta up">+13.6pt</span></span></li>
+              <li><span class="label">同行者：家族（維持）</span><span class="val">高水準</span></li>
+            </ul>
+            <div class="insight-box warn">
+              <strong>目的地化と長期滞在が極めて強く結びついている市場。</strong>複数テーマ（グルメ＋雪＋自然）で大幅上昇し、ガイドブック認知も+16.1ptと能動的情報収集を伴う。「深く・濃く・繰り返し訪れる」のが中国目的地層の典型像。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span>▸ 数値詳細グラフを開く（年齢・同行者・空港・訪問回数・宿泊・知ったきっかけ・期待）</span>
+          <span class="acc-icon">+</span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-grid">
+            <div class="chart-card">
+              <h5>年齢層構成</h5>
+              <canvas id="cn-age"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>同行者構成</h5>
+              <canvas id="cn-comp"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>利用空港</h5>
+              <canvas id="cn-air"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>訪問回数</h5>
+              <canvas id="cn-rep"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>宿泊数</h5>
+              <canvas id="cn-stay"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>知ったきっかけ</h5>
+              <canvas id="cn-info"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>期待コンテンツ</h5>
+              <canvas id="cn-exp"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== INDONESIA ========== -->
+    <div class="tab-content" id="tab-id">
+      <div class="country-summary">
+        <div class="country-summary-left">
+          <div class="country-en">Indonesia</div>
+          <h3>インドネシア</h3>
+          <span class="country-typology">TYPOLOGY: 若年雪体験型</span>
+        </div>
+        <div class="country-summary-meta">
+          <div class="summary-meta-item">
+            <div class="summary-meta-label">Sample n</div>
+            <div class="summary-meta-value">125</div>
+            <div class="summary-meta-detail">主要7か国中5位</div>
+          </div>
+          <div class="summary-meta-item alt">
+            <div class="summary-meta-label">目的地化率</div>
+            <div class="summary-meta-value">17.5<span style="font-size:14px;">%</span></div>
+            <div class="summary-meta-detail">主要7か国中4位</div>
+          </div>
+          <div class="summary-meta-item">
+            <div class="summary-meta-label">PCA象限</div>
+            <div class="summary-meta-value" style="font-size:16px;">上方独立</div>
+            <div class="summary-meta-detail">他市場と非類似</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="compare-cols">
+        <div class="compare-col">
+          <div class="compare-col-header all">
+            <span>① 回答者全体の傾向</span><span class="n-tag">n=125</span>
+          </div>
+          <div class="compare-col-body">
+            <ul class="profile-list">
+              <li><span class="label">成田空港利用</span><span class="val">51.2%</span></li>
+              <li><span class="label">年齢：30代</span><span class="val">43.2%</span></li>
+              <li><span class="label">年齢：20代</span><span class="val">35.2%</span></li>
+              <li><span class="label">同行者：家族</span><span class="val">44.8%</span></li>
+              <li><span class="label">同行者：友人</span><span class="val">29.6%</span></li>
+              <li><span class="label">SNS認知</span><span class="val">72.8%</span></li>
+              <li><span class="label">期待：ウィンタースポーツ</span><span class="val">21.6%</span></li>
+              <li><span class="label">庄川峡遊覧船 訪問予定</span><span class="val">54.4%</span></li>
+              <li><span class="label">五箇山合掌造り 訪問予定</span><span class="val">40.8%</span></li>
+            </ul>
+            <div class="insight-box">
+              <strong>「冬の日本」の典型イメージが訪問動機。</strong>ウィンタースポーツ21.6%・庄川峡54.4%・五箇山40.8%はいずれも7か国中最高で、熱帯気候からの「雪体験」需要と奥地・山間部スポットへの志向が明確。SNS依存度の極端な高さも東南アジア市場の典型。
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-col">
+          <div class="compare-col-header dst">
+            <span>② 目的地として来ている層</span><span class="n-tag">n=22 / 17.5%</span>
+          </div>
+          <div class="compare-col-body">
+            <ul class="profile-list">
+              <li><span class="label">20代比率</span><span class="val">50.0%<span class="delta up">+18.3pt</span></span></li>
+              <li><span class="label">期待：ウィンタースポーツ</span><span class="val">36.4%<span class="delta up">+17.2pt</span></span></li>
+              <li><span class="label">同行者：友人</span><span class="val">40.9%<span class="delta up">+14.0pt</span></span></li>
+              <li><span class="label">3泊以上比率</span><span class="val">40.9%<span class="delta up">+14.0pt</span></span></li>
+              <li><span class="label">SNS認知（高水準維持）</span><span class="val">70%超</span></li>
+            </ul>
+            <div class="insight-box warn">
+              <strong>若年層の友人グループ旅行が目的地層の中核。</strong>常夏国家ならではの雪体験ニーズが目的地化を強く牽引。ウィンタースポーツ期待が36.4%まで上昇する市場は他になく、富山の冬季資源との相性が極めて良い。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span>▸ 数値詳細グラフを開く（年齢・同行者・空港・訪問回数・宿泊・知ったきっかけ・期待）</span>
+          <span class="acc-icon">+</span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-grid">
+            <div class="chart-card">
+              <h5>年齢層構成</h5>
+              <canvas id="id-age"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>同行者構成</h5>
+              <canvas id="id-comp"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>利用空港</h5>
+              <canvas id="id-air"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>訪問回数</h5>
+              <canvas id="id-rep"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>宿泊数</h5>
+              <canvas id="id-stay"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>知ったきっかけ</h5>
+              <canvas id="id-info"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>期待コンテンツ</h5>
+              <canvas id="id-exp"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== UK ========== -->
+    <div class="tab-content" id="tab-uk">
+      <div class="uk-warning">
+        <strong>⚠ サンプルサイズ注記：</strong>イギリスの目的地層は <strong>n=12</strong> と小規模であり、1人あたり約8.3ptが指標値に影響する。以下の差分値は方向性を示す<strong>参考値</strong>として読まれたい。なお目的地化率15.0%は全体平均（15.3%）とほぼ等しく、欧米豪市場の中では相対的に目的地化が進んだ市場である点は留意に値する。
+      </div>
+
+      <div class="country-summary">
+        <div class="country-summary-left">
+          <div class="country-en">United Kingdom</div>
+          <h3>イギリス</h3>
+          <span class="country-typology">TYPOLOGY: 成熟リピーター一人旅型</span>
+        </div>
+        <div class="country-summary-meta">
+          <div class="summary-meta-item warn">
+            <div class="summary-meta-label">Sample n</div>
+            <div class="summary-meta-value">80</div>
+            <div class="summary-meta-detail">目的地層n=12（参考値）</div>
+          </div>
+          <div class="summary-meta-item alt">
+            <div class="summary-meta-label">目的地化率</div>
+            <div class="summary-meta-value">15.0<span style="font-size:14px;">%</span></div>
+            <div class="summary-meta-detail">欧米豪中で最高</div>
+          </div>
+          <div class="summary-meta-item">
+            <div class="summary-meta-label">PCA象限</div>
+            <div class="summary-meta-value" style="font-size:16px;">左下</div>
+            <div class="summary-meta-detail">欧米豪成熟群</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="compare-cols">
+        <div class="compare-col">
+          <div class="compare-col-header all">
+            <span>① 回答者全体の傾向</span><span class="n-tag">n=80</span>
+          </div>
+          <div class="compare-col-body">
+            <ul class="profile-list">
+              <li><span class="label">羽田空港利用</span><span class="val">56.2%</span></li>
+              <li><span class="label">新幹線利用</span><span class="val">92.5%</span></li>
+              <li><span class="label">同行者：夫婦/パートナー</span><span class="val">45.0%</span></li>
+              <li><span class="label">同行者：一人旅</span><span class="val">25.0%</span></li>
+              <li><span class="label">同行者：団体ツアー</span><span class="val">8.8%</span></li>
+              <li><span class="label">男性比率</span><span class="val">63.7%</span></li>
+              <li><span class="label">SNS認知</span><span class="val">8.8%</span></li>
+              <li><span class="label">「その他」認知</span><span class="val">38.8%</span></li>
+              <li><span class="label">旅行会社/ツアー認知</span><span class="val">12.5%</span></li>
+            </ul>
+            <div class="insight-box">
+              <strong>7か国中で最も特異なプロファイル。</strong>新幹線92.5%は全市場中最高で極めて単線的。一人旅25.0%と団体ツアー8.8%の両極が同時に厚い独特の構造。「その他」38.8%が7か国中最高で、定型メディアでは捕捉できない経路で富山を知る層が中核。
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-col">
+          <div class="compare-col-header dst">
+            <span>② 目的地として来ている層</span><span class="n-tag">n=12 / 15.0% ※参考値</span>
+          </div>
+          <div class="compare-col-body">
+            <ul class="profile-list">
+              <li><span class="label">3泊以上比率</span><span class="val">75.0%<span class="delta up">+51.5pt</span></span></li>
+              <li><span class="label">リピーター（3回以上）</span><span class="val">41.7%<span class="delta up">+37.3pt</span></span></li>
+              <li><span class="label">「その他」認知</span><span class="val">75.0%<span class="delta up">+42.6pt</span></span></li>
+              <li><span class="label">羽田空港利用</span><span class="val">83.3%<span class="delta up">+31.8pt</span></span></li>
+              <li><span class="label">同行者：一人旅</span><span class="val">41.7%<span class="delta up">+19.6pt</span></span></li>
+              <li><span class="label">日帰り比率</span><span class="val">8.3%<span class="delta down">−41.7pt</span></span></li>
+              <li><span class="label">初めて訪問</span><span class="val">50.0%<span class="delta down">−44.1pt</span></span></li>
+              <li><span class="label">期待：景観/自然</span><span class="val">66.7%<span class="delta up">+16.7pt</span></span></li>
+              <li><span class="label">期待：ウィンタースポーツ</span><span class="val">16.7%<span class="delta up">+15.2pt</span></span></li>
+            </ul>
+            <div class="insight-box warn">
+              <strong>※n=12のため参考値。</strong>「東京を拠点に新幹線で富山へ直行し、3泊以上の腰を据えた滞在を、個人ベースで繰り返す成熟リピーター層」として描き出せる。3泊以上+51.5pt・3回以上訪問+37.3ptは7か国中で最大の差分。人数規模は小さいが1人あたりの滞在価値は最高水準と推定される。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span>▸ 数値詳細グラフを開く（年齢・同行者・空港・訪問回数・宿泊・知ったきっかけ・期待）</span>
+          <span class="acc-icon">+</span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-grid">
+            <div class="chart-card">
+              <h5>年齢層構成</h5>
+              <canvas id="uk-age"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>同行者構成</h5>
+              <canvas id="uk-comp"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>利用空港</h5>
+              <canvas id="uk-air"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>訪問回数</h5>
+              <canvas id="uk-rep"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>宿泊数</h5>
+              <canvas id="uk-stay"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>知ったきっかけ</h5>
+              <canvas id="uk-info"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>期待コンテンツ</h5>
+              <canvas id="uk-exp"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== USA ========== -->
+    <div class="tab-content" id="tab-us">
+      <div class="country-summary">
+        <div class="country-summary-left">
+          <div class="country-en">United States</div>
+          <h3>アメリカ</h3>
+          <span class="country-typology">TYPOLOGY: 個人ニッチ型</span>
+        </div>
+        <div class="country-summary-meta">
+          <div class="summary-meta-item">
+            <div class="summary-meta-label">Sample n</div>
+            <div class="summary-meta-value">182</div>
+            <div class="summary-meta-detail">主要7か国中3位</div>
+          </div>
+          <div class="summary-meta-item alt">
+            <div class="summary-meta-label">目的地化率</div>
+            <div class="summary-meta-value">13.2<span style="font-size:14px;">%</span></div>
+            <div class="summary-meta-detail">主要7か国中6位</div>
+          </div>
+          <div class="summary-meta-item">
+            <div class="summary-meta-label">PCA象限</div>
+            <div class="summary-meta-value" style="font-size:16px;">左下</div>
+            <div class="summary-meta-detail">欧米豪成熟群</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="compare-cols">
+        <div class="compare-col">
+          <div class="compare-col-header all">
+            <span>① 回答者全体の傾向</span><span class="n-tag">n=182</span>
+          </div>
+          <div class="compare-col-body">
+            <ul class="profile-list">
+              <li><span class="label">羽田空港利用</span><span class="val">55.5%</span></li>
+              <li><span class="label">成田空港利用</span><span class="val">32.4%</span></li>
+              <li><span class="label">出発地：東京</span><span class="val">29.7%</span></li>
+              <li><span class="label">次訪問先：東京</span><span class="val">27.5%</span></li>
+              <li><span class="label">同行者：夫婦/パートナー</span><span class="val">40.1%</span></li>
+              <li><span class="label">同行者：一人旅</span><span class="val">19.8%</span></li>
+              <li><span class="label">「その他」認知</span><span class="val">36.8%</span></li>
+              <li><span class="label">日帰り比率</span><span class="val">50.0%</span></li>
+              <li><span class="label">3泊以上比率</span><span class="val">20.3%</span></li>
+            </ul>
+            <div class="insight-box">
+              <strong>東京を起点・終点とする旅程に富山が組み込まれている構造が明確。</strong>首都圏空港集中度が極めて高く（87.9%）、東京-富山-東京の周遊行程が支配的。「その他」認知36.8%は中継地利用ゆえの該当なし回答が大半だが、日帰り50%／3泊以上20.3%の長短二極化も特徴。
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-col">
+          <div class="compare-col-header dst">
+            <span>② 目的地として来ている層</span><span class="n-tag">n=24 / 13.2%</span>
+          </div>
+          <div class="compare-col-body">
+            <ul class="profile-list">
+              <li><span class="label">日帰り比率</span><span class="val">29.2%<span class="delta down">−24.0pt</span></span></li>
+              <li><span class="label">期待：グルメ/食事</span><span class="val">58.3%<span class="delta up">+17.8pt</span></span></li>
+              <li><span class="label">3泊以上比率</span><span class="val">33.3%<span class="delta up">+14.9pt</span></span></li>
+              <li><span class="label">夫婦/パートナー</span><span class="val">29.2%<span class="delta down">−12.6pt</span></span></li>
+              <li><span class="label">同行者：一人旅</span><span class="val">29.2%<span class="delta up">+10.8pt</span></span></li>
+              <li><span class="label">「その他」認知</span><span class="val">45.8%<span class="delta up">+10.4pt</span></span></li>
+            </ul>
+            <div class="insight-box warn">
+              <strong>目的意識の強い個人旅行者が中核。</strong>日帰り−24.0ptと滞在延長傾向が極めて強い。「その他」認知の高さは、ガラス芸術・建築・薬学等の定型カテゴリで捕捉できないニッチな動機が目的地化を支えている可能性を示唆。一人旅志向と長期滞在が結びつく市場。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span>▸ 数値詳細グラフを開く（年齢・同行者・空港・訪問回数・宿泊・知ったきっかけ・期待）</span>
+          <span class="acc-icon">+</span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-grid">
+            <div class="chart-card">
+              <h5>年齢層構成</h5>
+              <canvas id="us-age"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>同行者構成</h5>
+              <canvas id="us-comp"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>利用空港</h5>
+              <canvas id="us-air"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>訪問回数</h5>
+              <canvas id="us-rep"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>宿泊数</h5>
+              <canvas id="us-stay"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>知ったきっかけ</h5>
+              <canvas id="us-info"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>期待コンテンツ</h5>
+              <canvas id="us-exp"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== AUSTRALIA ========== -->
+    <div class="tab-content" id="tab-au">
+      <div class="country-summary">
+        <div class="country-summary-left">
+          <div class="country-en">Australia</div>
+          <h3>オーストラリア</h3>
+          <span class="country-typology">TYPOLOGY: シニア文化周遊型</span>
+        </div>
+        <div class="country-summary-meta">
+          <div class="summary-meta-item">
+            <div class="summary-meta-label">Sample n</div>
+            <div class="summary-meta-value">266</div>
+            <div class="summary-meta-detail">主要7か国中2位</div>
+          </div>
+          <div class="summary-meta-item alt">
+            <div class="summary-meta-label">目的地化率</div>
+            <div class="summary-meta-value">10.2<span style="font-size:14px;">%</span></div>
+            <div class="summary-meta-detail">主要7か国中7位</div>
+          </div>
+          <div class="summary-meta-item">
+            <div class="summary-meta-label">PCA象限</div>
+            <div class="summary-meta-value" style="font-size:16px;">左下</div>
+            <div class="summary-meta-detail">欧米豪成熟群</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="compare-cols">
+        <div class="compare-col">
+          <div class="compare-col-header all">
+            <span>① 回答者全体の傾向</span><span class="n-tag">n=266</span>
+          </div>
+          <div class="compare-col-body">
+            <ul class="profile-list">
+              <li><span class="label">同行者：夫婦/パートナー</span><span class="val">52.3%</span></li>
+              <li><span class="label">成田空港利用</span><span class="val">38.7%</span></li>
+              <li><span class="label">羽田空港利用</span><span class="val">36.8%</span></li>
+              <li><span class="label">60歳以上比率</span><span class="val">17.3%</span></li>
+              <li><span class="label">次訪問先：飛驒高山</span><span class="val">24.8%</span></li>
+              <li><span class="label">日帰り比率</span><span class="val">53.8%</span></li>
+              <li><span class="label">県内観光率</span><span class="val">63.9%</span></li>
+              <li><span class="label">初回訪問比率</span><span class="val">93.6%</span></li>
+              <li><span class="label">「その他」認知</span><span class="val">32.0%</span></li>
+            </ul>
+            <div class="insight-box">
+              <strong>「富山を能動的に目的地として選んでいない」プロファイルが最も明瞭な市場。</strong>日帰り53.8%・初回93.6%・県内観光率63.9%（全体より10pt低）が、富山滞在の「短く・浅く・一度きり」という特徴を裏付ける。「その他」32.0%は中継地利用ゆえの該当なし回答の反映と解釈される。
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-col">
+          <div class="compare-col-header dst">
+            <span>② 目的地として来ている層</span><span class="n-tag">n=27 / 10.2%</span>
+          </div>
+          <div class="compare-col-body">
+            <ul class="profile-list">
+              <li><span class="label">60歳以上比率</span><span class="val">37.0%<span class="delta up">+21.9pt</span></span></li>
+              <li><span class="label">20代比率</span><span class="val">11.1%<span class="delta down">−21.5pt</span></span></li>
+              <li><span class="label">期待：景観/自然</span><span class="val">37.0%<span class="delta down">−18.2pt</span></span></li>
+              <li><span class="label">旅行サイト/ブログ</span><span class="val">22.2%<span class="delta down">−17.5pt</span></span></li>
+              <li><span class="label">「その他」認知</span><span class="val">44.4%<span class="delta up">+13.9pt</span></span></li>
+              <li><span class="label">期待：歴史/文化</span><span class="val">44.4%<span class="delta up">+11.8pt</span></span></li>
+            </ul>
+            <div class="insight-box warn">
+              <strong>シニア層が目的地化の中核を担う。</strong>20代が激減し60歳以上が+21.9ptと大幅上昇。旅行サイト・ブログ経由の自主的情報収集が減り、旅行会社のパッケージや既存周遊コース経由での流入が中心と推察される。文化体験を求めるシニア夫婦旅行の姿が浮かぶ。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span>▸ 数値詳細グラフを開く（年齢・同行者・空港・訪問回数・宿泊・知ったきっかけ・期待）</span>
+          <span class="acc-icon">+</span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-grid">
+            <div class="chart-card">
+              <h5>年齢層構成</h5>
+              <canvas id="au-age"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>同行者構成</h5>
+              <canvas id="au-comp"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>利用空港</h5>
+              <canvas id="au-air"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>訪問回数</h5>
+              <canvas id="au-rep"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>宿泊数</h5>
+              <canvas id="au-stay"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>知ったきっかけ</h5>
+              <canvas id="au-info"></canvas>
+            </div>
+            <div class="chart-card">
+              <h5>期待コンテンツ</h5>
+              <canvas id="au-exp"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== Typology summary ===== -->
+<section class="typology-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">05</div>
+      <div class="section-title-block">
+        <div class="section-eyebrow">Typology Matrix / 7か国類型化</div>
+        <h2 class="section-title">7市場の目的地化メカニズム<br>—— 単一施策では届かない多様性。</h2>
+        <p class="section-lead">主要7か国の目的地化メカニズムは大きく7つの類型に分かれる。とりわけ欧米豪3市場の中でも、シニア夫婦のツアー流入型（豪）／個人ニッチ動機型（米）／成熟リピーター一人旅型（英）と完全に異なる3類型が存在する事実は、「欧米豪向け」という単一メッセージが極めて非効率であることを示している。</p>
+      </div>
+    </div>
+
+    <div class="typology-grid">
+      <div class="typology-card">
+        <div class="typology-card-country">Taiwan</div>
+        <div class="typology-card-name">日帰り頻度型</div>
+        <div class="typology-card-desc">小松便＋ガイドブック＋金沢拠点で日帰り往復。40代女性中心。「滞在の長さ」ではなく「往復頻度」で目的地化が表れる独特のパターン。</div>
+        <div class="typology-card-tag">DESTINATION RATE 26.4%</div>
+      </div>
+      <div class="typology-card">
+        <div class="typology-card-country">Thailand</div>
+        <div class="typology-card-name">友人グループ文化体験型</div>
+        <div class="typology-card-desc">関空経由＋30〜40代友人グループ＋3泊以上の長期滞在。歴史文化・買い物・冬季体験を能動的に求める。同行者：友人+38.2pt。</div>
+        <div class="typology-card-tag">DESTINATION RATE 25.5%</div>
+      </div>
+      <div class="typology-card">
+        <div class="typology-card-country">China</div>
+        <div class="typology-card-name">長期深堀型</div>
+        <div class="typology-card-desc">多元情報源＋3泊以上＋グルメ自然期待＋リピート。深く・濃く・繰り返し訪れる。3泊以上比率+23.7ptが象徴的。</div>
+        <div class="typology-card-tag">DESTINATION RATE 17.7%</div>
+      </div>
+      <div class="typology-card">
+        <div class="typology-card-country">Indonesia</div>
+        <div class="typology-card-name">若年雪体験型</div>
+        <div class="typology-card-desc">20代友人グループ＋3泊以上＋ウィンタースポーツ期待+17.2pt。常夏国家ならではの雪体験ニーズが牽引。</div>
+        <div class="typology-card-tag">DESTINATION RATE 17.5%</div>
+      </div>
+      <div class="typology-card">
+        <div class="typology-card-country">United Kingdom</div>
+        <div class="typology-card-name">成熟リピーター一人旅型</div>
+        <div class="typology-card-desc">首都圏空港＋新幹線直行＋一人旅＋3泊以上75%＋リピート率41.7%（※n=12参考値）。1人あたり滞在価値は7か国中最高水準と推定。</div>
+        <div class="typology-card-tag">DESTINATION RATE 15.0%</div>
+      </div>
+      <div class="typology-card">
+        <div class="typology-card-country">USA</div>
+        <div class="typology-card-name">個人ニッチ型</div>
+        <div class="typology-card-desc">一人旅+10.8pt＋3泊以上＋ガラス芸術等ニッチ動機。定型カテゴリで捕捉できない深い関心が目的地化を支える。</div>
+        <div class="typology-card-tag">DESTINATION RATE 13.2%</div>
+      </div>
+      <div class="typology-card">
+        <div class="typology-card-country">Australia</div>
+        <div class="typology-card-name">シニア文化周遊型</div>
+        <div class="typology-card-desc">60代以上夫婦＋ツアー流入＋文化体験志向。20代−21.5ptと激減、60歳以上+21.9pt。パッケージ経由の流入が中心。</div>
+        <div class="typology-card-tag">DESTINATION RATE 10.2%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Quote ===== -->
+<section class="quote-section">
+  <div class="container">
+    <div class="quote-block">
+      <div class="quote-mark">"</div>
+      <p class="quote-text">
+        SNSは富山認知の<span class="em">共通基盤</span>だが、目的地化の<span class="em">決め手</span>にはならない。<br>
+        「立ち寄り」を「目的地」に変えるのは、<span class="em">能動的探索</span>と<span class="em">信頼ある推奨</span>である。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Strategic Directions ===== -->
+<section class="action-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">06</div>
+      <div class="section-title-block">
+        <div class="section-eyebrow">Strategic Directions / 戦略的方向性</div>
+        <h2 class="section-title">本調査が示す6つの施策方向。</h2>
+        <p class="section-lead">市場別個別最適化を前提とした、富山県インバウンドプロモーションの戦略的方向性を6点に整理する。各方向性には本調査における定量的根拠を付記している。</p>
+      </div>
+    </div>
+
+    <div class="action-grid">
+      <div class="action-card">
+        <div class="action-card-num">DIRECTION / 01</div>
+        <div class="action-card-title">地方空港路線の維持・拡充を最重要インフラとして位置づける</div>
+        <div class="action-card-desc">小松空港・富山空港の国際路線は目的地化の物理的基盤。とりわけ台湾→小松便、タイ→関空ルートの安定運航が市場別目的地化率を直接左右する。一方イギリス型の「首都圏空港＋新幹線直行」も並立しうるため、二軸戦略が妥当。</div>
+        <div class="action-card-evidence">EVIDENCE: 小松空港利用率 +7.6pt（台湾は +21.7pt）</div>
+      </div>
+      <div class="action-card">
+        <div class="action-card-num">DIRECTION / 02</div>
+        <div class="action-card-title">欧米豪市場は「認知形成」段階から戦略再構築</div>
+        <div class="action-card-desc">豪・米・英の「その他」認知3〜4割は中継地利用ゆえの該当なし回答と解釈される。コンテンツ改善以前に、東京⇔金沢／高山ルート上で富山を1泊延伸させる「+1 Night Toyama」型訴求と、英語圏OTA・ガイドブック露出が必要。</div>
+        <div class="action-card-evidence">EVIDENCE: 欧米豪「その他」認知 32.0〜38.8%</div>
+      </div>
+      <div class="action-card">
+        <div class="action-card-num">DIRECTION / 03</div>
+        <div class="action-card-title">SNS施策とガイドブック・口コミ施策の二本柱化</div>
+        <div class="action-card-desc">SNSは認知の共通基盤として継続しつつ、目的地化の決め手であるガイドブック媒体露出・リピーター育成→口コミ醸成の循環構築を中長期的に組み立てる。市場別の最適媒体ミックスが鍵。</div>
+        <div class="action-card-evidence">EVIDENCE: SNS差分 +1.2pt vs ガイドブック +5.6pt</div>
+      </div>
+      <div class="action-card">
+        <div class="action-card-num">DIRECTION / 04</div>
+        <div class="action-card-title">国別プロモーション設計の個別最適化</div>
+        <div class="action-card-desc">7か国がほぼ完全に異なるメカニズムで目的地化。市場別にメッセージ・媒体・パッケージ設計を変えることの戦略的妥当性が定量的に示された。欧米豪3か国の中でも豪／米／英は異なる3類型として扱う必要。</div>
+        <div class="action-card-evidence">EVIDENCE: 目的地化率 4.0%（独）〜26.4%（台）の格差</div>
+      </div>
+      <div class="action-card">
+        <div class="action-card-num">DIRECTION / 05</div>
+        <div class="action-card-title">潜在ニーズと顕在化のギャップ解消</div>
+        <div class="action-card-desc">庄川峡遊覧船・宇奈月温泉・五箇山は目的地層でも「行きたい／訪問予定」ギャップが大きい。アクセス整備・予約導線・周遊商品設計で滞在日数・消費単価を押し上げる余地。インドネシア向け奥地パッケージとの相性が良い。</div>
+        <div class="action-card-evidence">EVIDENCE: 庄川峡 行きたい41.9% / 訪問予定21.0%</div>
+      </div>
+      <div class="action-card">
+        <div class="action-card-num">DIRECTION / 06</div>
+        <div class="action-card-title">ウィンタースポーツ／歴史文化テーマの戦略的重点化</div>
+        <div class="action-card-desc">数少ない「能動的目的地化テーマ」。冬季資源はインドネシア・中国・米・タイ・英で顕著に伸長。歴史文化は台湾+18.8pt、タイ+19.5pt、豪+11.8pt、米+11.3ptと複数市場で大幅伸長し、差別化要素となる。</div>
+        <div class="action-card-evidence">EVIDENCE: ウィンタースポーツ期待 +6.6pt／歴史文化 +5.0pt</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">富山県訪日外国人アンケート調査 2025</div>
+        <p class="footer-text">公益社団法人とやま観光推進機構が実施した訪日外国人意識調査の解析・分析結果。庁内関係者向けの戦略基礎資料として作成。本レポートは2026年1〜2月の冬期データに基づくため、季節変動の影響を受けた構造である可能性に留意。</p>
+      </div>
+      <div class="footer-col">
+        <h6>Sample</h6>
+        <p>有効回答数 n=2,032<br>主要7か国 n=1,210（59.5%）<br>目的地層 n=310（15.3%）</p>
+      </div>
+      <div class="footer-col">
+        <h6>Methods</h6>
+        <p>主成分分析（PCA）<br>アソシエーション分析<br>層別差分比較</p>
+      </div>
+      <div class="footer-col">
+        <h6>Issued</h6>
+        <p>2026年5月<br>VOL.01 / Full Edition<br>Internal Use</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 TOYAMA TOURISM ORGANIZATION</div>
+      <div>CONFIDENTIAL / 庁内関係者向け</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ========== Tab switching ==========
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.tab;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabContents.forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + key).classList.add('active');
+      // 該当タブの遅延チャート初期化
+      initCountryCharts(key);
+    });
+  });
+
+  // ========== Accordion ==========
+  function toggleAccordion(el) {
+    el.parentElement.classList.toggle('open');
+  }
+
+  // ========== Chart.js global defaults ==========
+  Chart.defaults.font.family = "'Noto Sans JP', 'Hiragino Sans', sans-serif";
+  Chart.defaults.font.size = 11;
+  Chart.defaults.color = '#555555';
+  Chart.defaults.plugins.legend.labels.boxWidth = 12;
+  Chart.defaults.plugins.legend.labels.padding = 14;
+
+  const COLORS = {
+    teal: '#4DB5B0',
+    tealDark: '#3A9591',
+    navy: '#1E3A8A',
+    navyDark: '#152960',
+    accent: '#D97757',
+    amber: '#E8A04A',
+    gray: '#D4D4D4',
+    grayLight: '#E8E8E8'
+  };
+
+  // ========== PCA Scatter Chart ==========
+  new Chart(document.getElementById('pcaChart'), {
+    type: 'scatter',
+    data: {
+      datasets: [
+        { label: '東アジア漢字圏', data: [
+          {x: 2.2, y: -0.8, label: '台湾'},
+          {x: 1.8, y: -0.5, label: '中国'}
+        ], backgroundColor: '#E07A5F', pointRadius: 12, pointHoverRadius: 16 },
+        { label: '欧米豪成熟', data: [
+          {x: -1.8, y: -1.2, label: 'オーストラリア'},
+          {x: -2.0, y: -0.9, label: 'アメリカ'},
+          {x: -1.5, y: -1.4, label: 'イギリス'}
+        ], backgroundColor: COLORS.teal, pointRadius: 12, pointHoverRadius: 16 },
+        { label: '東南アジア新興（タイ）', data: [
+          {x: 1.2, y: 1.5, label: 'タイ'}
+        ], backgroundColor: COLORS.navy, pointRadius: 12, pointHoverRadius: 16 },
+        { label: '独立（インドネシア）', data: [
+          {x: 0.4, y: 2.6, label: 'インドネシア'}
+        ], backgroundColor: COLORS.amber, pointRadius: 12, pointHoverRadius: 16 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: {
+          callbacks: { label: ctx => ctx.raw.label + ' (PC1: ' + ctx.raw.x + ', PC2: ' + ctx.raw.y + ')' }
+        },
+        datalabels: { display: false }
+      },
+      scales: {
+        x: {
+          min: -3, max: 3, grid: { color: '#E8E8E8' },
+          title: { display: true, text: 'PC1：通過利用 ← → 能動的選択', color: '#555' }
+        },
+        y: {
+          min: -3, max: 3, grid: { color: '#E8E8E8' },
+          title: { display: true, text: 'PC2：シニア文化 ← → 若年SNS', color: '#555' }
+        }
+      }
+    },
+    plugins: [{
+      afterDatasetsDraw(chart) {
+        const ctx = chart.ctx;
+        ctx.save();
+        ctx.font = "bold 11px 'Noto Sans JP'";
+        ctx.fillStyle = COLORS.navyDark;
+        chart.data.datasets.forEach(ds => {
+          const meta = chart.getDatasetMeta(chart.data.datasets.indexOf(ds));
+          meta.data.forEach((point, i) => {
+            ctx.fillText(ds.data[i].label, point.x + 14, point.y + 4);
+          });
+        });
+        ctx.restore();
+      }
+    }]
+  });
+
+  // ========== Overall Diff Bar Chart ==========
+  const diffData = [
+    {label: '宿泊：3泊以上', value: 18.3},
+    {label: '訪問予定：富山市ガラス美術館', value: 14.7},
+    {label: '県内観光あり', value: 14.1},
+    {label: '訪問予定：富岩運河環水公園', value: 11.9},
+    {label: '利用空港：成田国際空港', value: -11.3},
+    {label: '訪問回数：初めて', value: -10.7},
+    {label: '宿泊：日帰り', value: -10.5},
+    {label: '訪問予定：雨晴海岸', value: 9.8},
+    {label: '同行者：夫婦/パートナー', value: -9.2},
+    {label: '利用空港：羽田空港', value: -8.5},
+    {label: '利用空港：小松空港', value: 7.6},
+    {label: '交通手段：新幹線', value: 6.7},
+    {label: '期待：ウィンタースポーツ', value: 6.6},
+    {label: '訪問回数：3回以上', value: 5.7},
+    {label: 'きっかけ：ガイドブック', value: 5.6},
+    {label: 'きっかけ：家族/友人の紹介', value: 5.4}
+  ];
+  new Chart(document.getElementById('overallDiffChart'), {
+    type: 'bar',
+    data: {
+      labels: diffData.map(d => d.label),
+      datasets: [{
+        data: diffData.map(d => d.value),
+        backgroundColor: diffData.map(d => d.value > 0 ? COLORS.teal : COLORS.accent),
+        borderColor: diffData.map(d => d.value > 0 ? COLORS.tealDark : COLORS.accent),
+        borderWidth: 1
+      }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => (ctx.raw > 0 ? '+' : '') + ctx.raw + 'pt' } } },
+      scales: {
+        x: { grid: { color: '#E8E8E8' }, title: { display: true, text: '目的地層 − 非目的地層（pt）' } },
+        y: { grid: { display: false } }
+      }
+    }
+  });
+
+  // ========== Stay chart (overall comparison) ==========
+  new Chart(document.getElementById('stayChart'), {
+    type: 'bar',
+    data: {
+      labels: ['日帰り', '1泊', '2泊', '3泊以上'],
+      datasets: [
+        { label: '非目的地層', data: [41.8, 18.1, 21.3, 18.8], backgroundColor: COLORS.gray },
+        { label: '目的地層', data: [31.3, 13.5, 18.1, 37.1], backgroundColor: COLORS.navy }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom' } },
+      scales: { y: { beginAtZero: true, title: { display: true, text: '%' } } }
+    }
+  });
+
+  // ========== Awareness chart (overall) ==========
+  new Chart(document.getElementById('awareChart'), {
+    type: 'bar',
+    data: {
+      labels: ['SNS', '旅行サイト/ブログ', 'ガイドブック', '家族/友人紹介', 'メディア', '旅行会社/ツアー'],
+      datasets: [
+        { label: '非目的地層', data: [36.9, 28.4, 10.2, 19.8, 5.1, 3.5], backgroundColor: COLORS.gray },
+        { label: '目的地層', data: [38.1, 23.9, 15.8, 25.2, 6.8, 3.2], backgroundColor: COLORS.teal }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom' } },
+      scales: { y: { beginAtZero: true, title: { display: true, text: '%' } } }
+    }
+  });
+
+  // ===== Standardized country detail data (from b案比較データ) =====
+  const CHART_LABELS = {"age": ["19歳以下", "20代", "30代", "40代", "50代", "60歳以上"], "comp": ["夫婦/パートナー", "家族", "友人", "一人旅", "団体ツアー"], "air": ["成田", "羽田", "中部", "関西", "小松", "富山"], "rep": ["初めて", "2回目", "3回以上"], "stay": ["日帰り", "1泊", "2泊", "3泊以上"], "info": ["SNS", "旅行サイト", "ガイドブック", "家族/友人", "旅行会社", "メディア", "その他"], "exp": ["景観/自然", "グルメ/食事", "歴史/文化", "温泉", "ショッピング", "ウィンタースポーツ"]};
+  const COUNTRY_NAME = {"tw": "台湾", "th": "タイ", "cn": "中国", "id": "インドネシア", "uk": "イギリス", "us": "アメリカ", "au": "オーストラリア"};
+  const COUNTRY_DATA = {"tw": {"age": {"A": [10.5, 14.8, 19.6, 31.1, 13.4, 10.0], "B": [8.0, 8.0, 17.3, 26.7, 22.7, 16.0]}, "comp": {"A": [20.6, 52.6, 22.0, 4.8, 0.0], "B": [21.3, 48.0, 25.3, 5.3, 0.0]}, "air": {"A": [18.2, 7.2, 33.5, 27.8, 19.6, 3.8], "B": [9.3, 4.0, 18.7, 32.0, 41.3, 1.3]}, "rep": {"A": [75.1, 17.7, 7.2], "B": [73.3, 17.3, 9.3]}, "stay": {"A": [34.9, 25.4, 25.8, 13.9], "B": [52.0, 16.0, 12.0, 20.0]}, "info": {"A": [34.4, 32.1, 24.4, 37.3, 1.9, 4.8, 3.8], "B": [33.3, 40.0, 37.3, 33.3, 5.3, 9.3, 2.7]}, "exp": {"A": [75.1, 70.8, 17.2, 12.0, 5.7, 8.6], "B": [81.3, 62.7, 36.0, 20.0, 13.3, 6.7]}}, "th": {"age": {"A": [4.1, 9.6, 41.1, 21.9, 16.4, 6.8], "B": [12.0, 4.0, 36.0, 32.0, 16.0, 0.0]}, "comp": {"A": [31.5, 46.6, 17.8, 2.7, 0.0], "B": [8.0, 28.0, 56.0, 8.0, 0.0]}, "air": {"A": [17.8, 9.6, 23.3, 52.1, 2.7, 1.4], "B": [24.0, 8.0, 4.0, 48.0, 0.0, 8.0]}, "rep": {"A": [80.8, 13.7, 5.5], "B": [68.0, 12.0, 20.0]}, "stay": {"A": [27.4, 24.7, 26.0, 21.9], "B": [20.0, 16.0, 8.0, 56.0]}, "info": {"A": [72.6, 28.8, 2.7, 13.7, 1.4, 8.2, 4.1], "B": [64.0, 20.0, 4.0, 20.0, 0.0, 16.0, 8.0]}, "exp": {"A": [61.6, 46.6, 20.5, 15.1, 17.8, 11.0], "B": [44.0, 32.0, 40.0, 4.0, 24.0, 16.0]}}, "cn": {"age": {"A": [11.1, 14.6, 32.6, 28.5, 7.6, 5.6], "B": [19.4, 22.6, 19.4, 25.8, 6.5, 6.5]}, "comp": {"A": [33.3, 52.8, 11.1, 2.1, 0.7], "B": [22.6, 51.6, 12.9, 9.7, 3.2]}, "air": {"A": [13.9, 31.9, 25.7, 25.0, 3.5, 10.4], "B": [12.9, 25.8, 12.9, 22.6, 3.2, 16.1]}, "rep": {"A": [88.9, 9.0, 2.1], "B": [71.0, 22.6, 6.5]}, "stay": {"A": [20.8, 28.5, 29.2, 21.5], "B": [19.4, 6.5, 29.0, 45.2]}, "info": {"A": [50.0, 29.9, 19.4, 34.7, 0.7, 5.6, 4.2], "B": [48.4, 22.6, 35.5, 22.6, 3.2, 12.9, 9.7]}, "exp": {"A": [81.9, 68.8, 17.4, 21.5, 7.6, 12.5], "B": [83.9, 87.1, 25.8, 19.4, 6.5, 29.0]}}, "id": {"age": {"A": [1.0, 31.7, 44.2, 9.6, 8.7, 4.8], "B": [9.1, 50.0, 36.4, 0.0, 4.5, 0.0]}, "comp": {"A": [18.3, 48.1, 26.9, 4.8, 1.0], "B": [18.2, 31.8, 40.9, 4.5, 0.0]}, "air": {"A": [51.9, 26.0, 9.6, 16.3, 0.0, 8.7], "B": [45.5, 27.3, 4.5, 22.7, 0.0, 4.5]}, "rep": {"A": [84.6, 10.6, 4.8], "B": [81.8, 9.1, 9.1]}, "stay": {"A": [26.0, 10.6, 36.5, 26.9], "B": [18.2, 4.5, 36.4, 40.9]}, "info": {"A": [74.0, 22.1, 4.8, 14.4, 0.0, 6.7, 4.8], "B": [68.2, 9.1, 9.1, 22.7, 0.0, 4.5, 4.5]}, "exp": {"A": [71.2, 36.5, 24.0, 11.5, 12.5, 19.2], "B": [72.7, 22.7, 27.3, 4.5, 9.1, 36.4]}}, "uk": {"age": {"A": [1.5, 30.9, 16.2, 16.2, 17.6, 17.6], "B": [0.0, 25.0, 33.3, 33.3, 8.3, 0.0]}, "comp": {"A": [47.1, 4.4, 14.7, 22.1, 10.3], "B": [33.3, 8.3, 8.3, 41.7, 0.0]}, "air": {"A": [29.4, 51.5, 0.0, 13.2, 0.0, 1.5], "B": [16.7, 83.3, 0.0, 8.3, 0.0, 0.0]}, "rep": {"A": [94.1, 1.5, 4.4], "B": [50.0, 8.3, 41.7]}, "stay": {"A": [50.0, 13.2, 13.2, 23.5], "B": [8.3, 8.3, 8.3, 75.0]}, "info": {"A": [8.8, 27.9, 5.9, 14.7, 14.7, 1.5, 32.4], "B": [8.3, 16.7, 0.0, 8.3, 0.0, 0.0, 75.0]}, "exp": {"A": [50.0, 42.6, 32.4, 11.8, 14.7, 1.5], "B": [66.7, 50.0, 33.3, 25.0, 0.0, 16.7]}}, "us": {"age": {"A": [0.0, 27.2, 24.1, 18.4, 13.3, 17.1], "B": [0.0, 33.3, 20.8, 12.5, 16.7, 16.7]}, "comp": {"A": [41.8, 20.9, 17.1, 18.4, 0.6], "B": [29.2, 12.5, 25.0, 29.2, 0.0]}, "air": {"A": [34.2, 55.1, 1.3, 7.0, 0.0, 5.7], "B": [20.8, 58.3, 0.0, 12.5, 0.0, 8.3]}, "rep": {"A": [86.1, 5.1, 8.9], "B": [87.5, 8.3, 4.2]}, "stay": {"A": [53.2, 12.7, 15.8, 18.4], "B": [29.2, 16.7, 20.8, 33.3]}, "info": {"A": [23.4, 22.2, 5.7, 22.2, 4.4, 3.2, 35.4], "B": [12.5, 20.8, 0.0, 25.0, 4.2, 4.2, 45.8]}, "exp": {"A": [46.8, 40.5, 30.4, 13.9, 12.7, 6.3], "B": [54.2, 58.3, 41.7, 25.0, 0.0, 16.7]}}, "au": {"age": {"A": [3.3, 32.6, 25.9, 10.5, 12.6, 15.1], "B": [0.0, 11.1, 33.3, 3.7, 14.8, 37.0]}, "comp": {"A": [51.0, 17.6, 23.8, 7.1, 0.0], "B": [63.0, 11.1, 14.8, 7.4, 0.0]}, "air": {"A": [39.7, 37.2, 2.9, 23.4, 1.3, 3.3], "B": [29.6, 33.3, 0.0, 22.2, 0.0, 0.0]}, "rep": {"A": [94.1, 3.8, 2.1], "B": [88.9, 7.4, 3.7]}, "stay": {"A": [54.0, 16.3, 17.6, 12.1], "B": [51.9, 14.8, 14.8, 18.5]}, "info": {"A": [23.4, 39.7, 5.4, 9.6, 2.9, 2.5, 30.5], "B": [18.5, 22.2, 0.0, 22.2, 0.0, 3.7, 44.4]}, "exp": {"A": [55.2, 44.4, 32.6, 13.0, 8.8, 7.1], "B": [37.0, 51.9, 44.4, 7.4, 14.8, 3.7]}}};
+  const RADAR_MAX = {"tw": 90, "th": 70, "cn": 90, "id": 80, "uk": 70, "us": 60, "au": 60};
+
+  const CARD_ORDER = ['age','comp','air','rep','stay','info','exp'];
+  const initialized = {};
+  function makeBar(canvasId, labels, name, A, B) {
+    new Chart(document.getElementById(canvasId), {
+      type: 'bar',
+      data: { labels: labels, datasets: [
+        { label: name + '全体', data: A, backgroundColor: COLORS.teal },
+        { label: name + '目的地層', data: B, backgroundColor: COLORS.navy }
+      ]},
+      options: { responsive: true, plugins: { legend: { position: 'bottom' } }, scales: { y: { beginAtZero: true, title: { display: true, text: '%' } } } }
+    });
+  }
+  function makeRadar(canvasId, labels, name, A, B, maxv) {
+    new Chart(document.getElementById(canvasId), {
+      type: 'radar',
+      data: { labels: labels, datasets: [
+        { label: name + '全体', data: A, backgroundColor: 'rgba(77,181,176,0.2)', borderColor: COLORS.teal, borderWidth: 2 },
+        { label: name + '目的地層', data: B, backgroundColor: 'rgba(30,58,138,0.2)', borderColor: COLORS.navy, borderWidth: 2 }
+      ]},
+      options: { responsive: true, plugins: { legend: { position: 'bottom' } }, scales: { r: { suggestedMin: 0, suggestedMax: maxv } } }
+    });
+  }
+  function initCountryCharts(key) {
+    if (initialized[key]) return;
+    const d = COUNTRY_DATA[key];
+    if (!d) return;
+    initialized[key] = true;
+    const name = COUNTRY_NAME[key];
+    const ukNote = (key === 'uk') ? '（n=12参考）' : '';
+    CARD_ORDER.forEach(function(metric) {
+      const cid = key + '-' + metric;
+      const labels = CHART_LABELS[metric];
+      const A = d[metric].A, B = d[metric].B;
+      if (metric === 'exp') {
+        makeRadar(cid, labels, name, A, B, RADAR_MAX[key]);
+      } else {
+        new Chart(document.getElementById(cid), {
+          type: 'bar',
+          data: { labels: labels, datasets: [
+            { label: name + '全体', data: A, backgroundColor: COLORS.teal },
+            { label: name + '目的地層' + ukNote, data: B, backgroundColor: COLORS.navy }
+          ]},
+          options: { responsive: true, plugins: { legend: { position: 'bottom' } }, scales: { y: { beginAtZero: true, title: { display: true, text: '%' } } } }
+        });
+      }
+    });
+  }
+
+  // Initialize default (Taiwan) on load
+  window.addEventListener('load', () => {
+    initCountryCharts('tw');
+  });
+</script>
+</body>
+</html>
